@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>Phrases</ion-title>
+    <ion-title>Ragazza 10 Ma ...</ion-title>
     <ion-buttons end>
 
     </ion-buttons>
@@ -14,20 +14,22 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <ion-item *ngFor="let phrase of phrases">
+
+
       <ion-avatar item-left>
-        <img src="{{phrase.giphyUrl}}">
+        <img *ngIf="!!phrase" src="{{phrase.giphyUrl}}">
       </ion-avatar>
-      <span>{{phrase.content}}</span>
-      <button ion-button >
+      <ion-item *ngIf="!!phrase">
+        <span>{{phrase.content}}</span>
+      </ion-item>
+      <button [disabled]="!buttonActive" [ngClass]="{'activated' : buttonActive}" (click)='sendAnswer("yes");' ion-button >
         Si
-        <ion-icon name="md-checkmark"></ion-icon>
       </button>
-      <button ion-button>
+      <button [disabled]="!buttonActive" [ngClass]="{'activated' : buttonActive}" (click)='sendAnswer("no");' ion-button>
         No
-        <ion-icon name="close-circle"></ion-icon>
       </button>
-    </ion-item>
-  </ion-list>
+  <button (click)='next()' ion-button>
+    continua
+  </button>
+
 </ion-content>
