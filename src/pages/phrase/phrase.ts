@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {PhraseService} from "../../providers/phrase-service";
-import {GiphyService} from '../../providers/giphy-service';
 
 /**
  * Generated class for the PhrasePage page.
@@ -23,7 +22,7 @@ export class PhrasePage {
   public buttonActive: boolean = true;
   public submitted: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public phraseService: PhraseService, public giphyService: GiphyService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public phraseService: PhraseService) {
   }
 
 
@@ -32,9 +31,6 @@ export class PhrasePage {
 
     this.phraseService.getPhrase().subscribe(phrase => {
       this.phrase = phrase;
-      this.giphyService.get(phrase.content).subscribe(url => {
-        phrase.giphyUrl = url
-      });
 
     })
   }
@@ -44,9 +40,7 @@ export class PhrasePage {
       this.phrase = phrase;
       this.buttonActive = true;
       this.submitted = false;
-      this.giphyService.get(phrase.content).subscribe(url => {
-        phrase.giphyUrl = url
-      });
+
 
     })
   }
