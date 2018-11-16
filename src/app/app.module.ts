@@ -1,13 +1,10 @@
-import { NgModule, ErrorHandler, forwardRef } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
 import {PhrasePage} from "../pages/phrase/phrase";
 import {PhrasePageModule} from "../pages/phrase/phrase.module";
 
@@ -17,10 +14,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
-    ContactPage,
-    HomePage,
-    TabsPage
+    HomePage
   ],
   imports: [
     BrowserModule,
@@ -31,11 +25,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
-    ContactPage,
     HomePage,
-    PhrasePage,
-    TabsPage
+    PhrasePage
   ],
   providers: [
     StatusBar,
