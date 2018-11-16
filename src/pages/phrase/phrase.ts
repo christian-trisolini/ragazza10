@@ -18,9 +18,10 @@ import {GiphyService} from '../../providers/giphy-service';
 export class PhrasePage {
 
   public phrase: any;
-  public yesPercentage: number;
-  public noPercentage: number;
+  public yesPercentage: string;
+  public noPercentage: string;
   public buttonActive: boolean = true;
+  public submitted: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public phraseService: PhraseService, public giphyService: GiphyService) {
   }
@@ -42,6 +43,7 @@ export class PhrasePage {
     this.phraseService.getPhrase().subscribe(phrase => {
       this.phrase = phrase;
       this.buttonActive = true;
+      this.submitted = false;
       this.giphyService.get(phrase.content).subscribe(url => {
         phrase.giphyUrl = url
       });
@@ -53,14 +55,14 @@ export class PhrasePage {
     this.phraseService.sendAnswer(answer, this.phrase.id).subscribe(phrase => {
       this.phrase = phrase;
       this.buttonActive = false;
-      this.giphyService.get(phrase.content).subscribe(url => {
-        phrase.giphyUrl = url
-      });
 
       console.log("yesPercentage: "+(this.phrase.yes/(this.phrase.no+this.phrase.yes)));
       console.log("noPercentage: "+(this.phrase.no/(this.phrase.no+this.phrase.yes)));
-      this.yesPercentage = (this.phrase.yes/(this.phrase.no+this.phrase.yes));
-      this.noPercentage = (this.phrase.no/(this.phrase.no+this.phrase.yes));
+      this.yesPercentage = (this.phrase.yes/(this.phrase.no+this.phrase.yes)*100).toFixed(1) + "%";
+      this.noPercentage = (this.phrase.no/(this.phrase.no+this.phrase.yes)*100).toFixed(1) + "%";
+
+      this.submitted = true;
+
     })
 
   }

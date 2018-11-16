@@ -16,18 +16,22 @@
 <ion-content padding>
 
 
-      <ion-avatar item-left>
-        <img *ngIf="!!phrase" src="{{phrase.giphyUrl}}">
-      </ion-avatar>
-      <ion-item *ngIf="!!phrase">
-        <span>{{phrase.content}}</span>
-      </ion-item>
-      <button [disabled]="!buttonActive" [ngClass]="{'activated' : buttonActive}" (click)='sendAnswer("yes");' ion-button >
-        Si
-      </button>
-      <button [disabled]="!buttonActive" [ngClass]="{'activated' : buttonActive}" (click)='sendAnswer("no");' ion-button>
-        No
-      </button>
+
+  <ion-item *ngIf="!!phrase">
+    <span>{{phrase.content}}</span>
+  </ion-item>
+  <button *ngIf="!submitted" [disabled]="!buttonActive" [ngClass]="{'activated' : buttonActive}" (click)='sendAnswer("yes");' ion-button>
+    Si
+  </button>
+  <button *ngIf="!submitted" [disabled]="!buttonActive" [ngClass]="{'activated' : buttonActive}" (click)='sendAnswer("no");' ion-button>
+    No
+  </button>
+  <button *ngIf="submitted" ion-button>
+    {{yesPercentage}}
+  </button>
+  <button *ngIf="submitted"  ion-button>
+    {{noPercentage}}
+  </button>
   <button (click)='next()' ion-button>
     continua
   </button>
